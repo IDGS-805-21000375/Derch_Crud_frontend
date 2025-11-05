@@ -22,7 +22,7 @@
               <td>${{ product.precio }}</td>
               <td>
                 <div class="btn-group btn-group-sm">
-                  <!-- ✅ GET por ID - Ver detalles -->
+                  <!--  GET por ID - Ver detalles -->
                   <button class="btn btn-info" 
                           (click)="viewProductDetails(product.id!)">
                     Ver
@@ -34,7 +34,7 @@
                     Editar
                   </button>
                   
-                  <!-- ✅ DELETE -->
+                  <!-- DELETE -->
                   <button class="btn btn-danger" 
                           (click)="deleteProduct(product.id!)">
                     Eliminar
@@ -52,14 +52,14 @@
 
     <!-- Columna de Formulario y Detalles -->
     <div class="col-md-6">
-      <!-- ✅ Componente de Formulario (POST y PUT) -->
+      <!-- Componente de Formulario (POST y PUT) -->
       <app-product-form 
         [product]="selectedProduct"
         (productCreated)="onProductCreated($event)"
         (productUpdated)="onProductUpdated($event)">
       </app-product-form>
 
-      <!-- ✅ Detalles del Producto (GET por ID) -->
+      <!--Detalles del Producto (GET por ID) -->
       <div *ngIf="showDetails && productDetails" class="card mt-3">
         <div class="card-header bg-info text-white">
           <h5 class="card-title mb-0">Detalles del Producto</h5>

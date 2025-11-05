@@ -44,7 +44,7 @@ export class ProductFormComponent implements OnChanges {
       const productData: Product = this.productForm.value;
 
       if (this.isEditing && this.product) {
-        // ✅ PUT - Actualizar producto existente
+        //  PUT - Actualizar producto existente
         this.productService.updateProduct(this.product.id!, productData).subscribe({
           next: (updatedProduct) => {
             this.productUpdated.emit(updatedProduct);
@@ -59,7 +59,7 @@ export class ProductFormComponent implements OnChanges {
           }
         });
       } else {
-        // ✅ POST - Crear nuevo producto
+        //  POST - Crear nuevo producto
         this.productService.createProduct(productData).subscribe({
           next: (newProduct) => {
             this.productCreated.emit(newProduct);
