@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Columna de Lista -->
+    <div class="col-md-6">
+      <h2>Lista de Productos</h2>
+      
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products" 
+                [class.table-active]="selectedProduct?.id === product.id">
+              <td>{{ product.id }}</td>
+              <td>{{ product.nombre }}</td>
+              <td>${{ product.precio }}</td>
+              <td>
+                <div class="btn-group btn-group-sm">
+                  <!-- ✅ GET por ID - Ver detalles -->
+                  <button class="btn btn-info" 
+                          (click)="viewProductDetails(product.id!)">
+                    Ver
+                  </button>
+                  
+                  <!-- Seleccionar para editar -->
+                  <button class="btn btn-warning" 
+                          (click)="selectProduct(product)">
+                    Editar
+                  </button>
+                  
+                  <!-- ✅ DELETE -->
+                  <button class="btn btn-danger" 
+                          (click)="deleteProduct(product.id!)">
+                    Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="products.length === 0">
+              <td colspan="4" class="text-center">No hay productos disponibles</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Columna de Formulario y Detalles -->
+    <div class="col-md-6">
+      <!-- ✅ Componente de Formulario (POST y PUT) -->
+      <app-product-form 
+        [product]="selectedProduct"
+        (productCreated)="onProductCreated($event)"
+        (productUpdated)="onProductUpdated($event)">
+      </app-product-form>
+
+      <!-- ✅ Detalles del Producto (GET por ID) -->
+      <div *ngIf="showDetails && productDetails" class="card mt-3">
+        <div class="card-header bg-info text-white">
+          <h5 class="card-title mb-0">Detalles del Producto</h5>
+          <button class="btn btn-sm btn-light float-end" (click)="closeDetails()">×</button>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 fw-bold">ID:</div>
+            <div class="col-md-8">{{ productDetails.id }}</div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 fw-bold">Nombre:</div>
+            <div class="col-md-8">{{ productDetails.nombre }}</div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 fw-bold">Precio:</div>
+            <div class="col-md-8">${{ productDetails.precio }}</div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4 fw-bold">Descripción:</div>
+            <div class="col-md-8">{{ productDetails.descripcion }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
